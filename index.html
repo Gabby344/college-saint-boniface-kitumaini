@@ -6,6 +6,7 @@
     <title>Collège Saint Boniface Kitumaïni - Excellence Éducative depuis 1923</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
     <style>
         /* Variables et reset améliorés */
         :root {
@@ -127,6 +128,18 @@
 
         .btn-outline:hover {
             color: white;
+        }
+
+        /* Scroll Progress Bar */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background: var(--secondary);
+            z-index: 1001;
+            transition: width 0.3s ease;
         }
 
         /* Header et Navigation améliorés */
@@ -684,6 +697,231 @@
             gap: 10px;
         }
 
+        /* Nouvelle Section Inscription */
+        .inscription-section {
+            background: var(--gradient);
+            color: white;
+            padding: 100px 0;
+        }
+
+        .inscription-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+
+        .step-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 40px 30px;
+            border-radius: var(--radius-large);
+            text-align: center;
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .step-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .step-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--secondary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 2rem;
+            color: var(--dark);
+        }
+
+        .inscription-form-container {
+            background: white;
+            border-radius: var(--radius-large);
+            padding: 50px;
+            margin-top: 50px;
+            box-shadow: var(--shadow-large);
+        }
+
+        .form-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            border-bottom: 2px solid var(--light-gray);
+        }
+
+        .form-tab {
+            padding: 15px 30px;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            font-weight: 600;
+            color: var(--dark-gray);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .form-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeInUp 0.5s ease;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        /* Section Blog des Anciens */
+        .blog-section {
+            background: var(--light);
+        }
+
+        .blog-filters {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 10px 20px;
+            background: white;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            border-radius: 25px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        .filter-btn.active,
+        .filter-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .blog-card {
+            background: white;
+            border-radius: var(--radius-large);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .blog-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-large);
+        }
+
+        .blog-header {
+            padding: 25px 25px 15px;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .blog-author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+
+        .author-info h4 {
+            margin-bottom: 5px;
+            color: var(--primary);
+        }
+
+        .author-meta {
+            font-size: 0.9rem;
+            color: var(--dark-gray);
+        }
+
+        .blog-category {
+            display: inline-block;
+            padding: 5px 15px;
+            background: var(--secondary);
+            color: var(--dark);
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .blog-content {
+            padding: 25px;
+        }
+
+        .blog-content h3 {
+            margin-bottom: 15px;
+            color: var(--dark);
+            line-height: 1.4;
+        }
+
+        .blog-content p {
+            color: var(--dark-gray);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .blog-stats {
+            display: flex;
+            gap: 20px;
+            padding: 20px 25px;
+            background: var(--light-gray);
+            border-top: 1px solid #eee;
+        }
+
+        .stat {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--dark-gray);
+            font-size: 0.9rem;
+        }
+
+        .add-testimonial {
+            background: var(--gradient);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+            border-radius: var(--radius-large);
+            margin-top: 50px;
+        }
+
         /* Contact amélioré */
         .contact-container {
             display: flex;
@@ -942,6 +1180,95 @@
             opacity: 0.7;
         }
 
+        /* Admin Access Button */
+        .admin-access {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+        }
+
+        .admin-btn {
+            background: var(--accent);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: var(--shadow-large);
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .admin-btn:hover {
+            transform: scale(1.1);
+            background: #a71e2a;
+        }
+
+        /* Modal pour ajouter un témoignage */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: var(--radius-large);
+            padding: 40px;
+            max-width: 90%;
+            max-height: 90%;
+            overflow-y: auto;
+            position: relative;
+            transform: scale(0.9);
+            transition: var(--transition);
+        }
+
+        .modal.active .modal-content {
+            transform: scale(1);
+        }
+
+        .testimonial-modal .modal-content {
+            max-width: 600px;
+        }
+
+        .rating-stars {
+            display: flex;
+            gap: 5px;
+            margin: 15px 0;
+            justify-content: center;
+        }
+
+        .star {
+            font-size: 2rem;
+            color: #ddd;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .star:hover,
+        .star.active {
+            color: var(--secondary);
+        }
+
         /* Animations améliorées */
         @keyframes fadeInUp {
             from {
@@ -1138,6 +1465,27 @@
             .newsletter-form {
                 flex-direction: column;
             }
+            
+            .inscription-steps {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .blog-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .blog-filters {
+                justify-content: flex-start;
+            }
+            
+            .admin-access {
+                bottom: 20px;
+                right: 20px;
+            }
         }
 
         @media (max-width: 576px) {
@@ -1174,6 +1522,16 @@
     </style>
 </head>
 <body>
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- Admin Access Button -->
+    <div class="admin-access">
+        <a href="admin.html" class="admin-btn" title="Accès Administrateur">
+            <i class="fas fa-cogs"></i>
+        </a>
+    </div>
+
     <!-- Header -->
     <header id="header">
         <div class="container">
@@ -1195,6 +1553,8 @@
                         <a href="#centenaire">100 Ans</a>
                         <a href="#programmes">Programmes</a>
                         <a href="#actualites">Actualités</a>
+                        <a href="#inscription">Inscription</a>
+                        <a href="#blog">Témoignages</a>
                         <a href="#contact">Contact</a>
                     </div>
                 </nav>
@@ -1379,6 +1739,324 @@
         </div>
     </section>
 
+    <!-- Nouvelle Section Inscription -->
+    <section id="inscription" class="inscription-section">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>Inscription en Ligne</h2>
+                <p>Rejoignez la grande famille du Collège Saint Boniface Kitumaïni</p>
+            </div>
+
+            <div class="inscription-steps">
+                <div class="step-card fade-in">
+                    <div class="step-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <h3>1. Dossier d'Inscription</h3>
+                    <p>Téléchargez et complétez le dossier d'inscription avec tous les documents requis</p>
+                </div>
+                <div class="step-card fade-in">
+                    <div class="step-icon">
+                        <i class="fas fa-edit"></i>
+                    </div>
+                    <h3>2. Formulaire en Ligne</h3>
+                    <p>Remplissez notre formulaire d'inscription en ligne sécurisé</p>
+                </div>
+                <div class="step-card fade-in">
+                    <div class="step-icon">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <h3>3. Entretien & Tests</h3>
+                    <p>Planifiez votre entretien et tests d'admission avec notre équipe</p>
+                </div>
+                <div class="step-card fade-in">
+                    <div class="step-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>4. Admission</h3>
+                    <p>Recevez votre lettre d'admission et préparez votre rentrée</p>
+                </div>
+            </div>
+
+            <div class="inscription-form-container fade-in">
+                <div class="form-tabs">
+                    <button class="form-tab active" data-tab="primaire">Primaire</button>
+                    <button class="form-tab" data-tab="secondaire">Secondaire</button>
+                    <button class="form-tab" data-tab="information">Demande d'Info</button>
+                </div>
+
+                <div id="primaire" class="tab-content active">
+                    <h3 style="text-align: center; margin-bottom: 30px; color: var(--primary);">Inscription - Enseignement Primaire</h3>
+                    <form id="inscriptionPrimaireForm">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="enfantNom">Nom de l'Enfant *</label>
+                                <input type="text" id="enfantNom" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="enfantPrenom">Prénom de l'Enfant *</label>
+                                <input type="text" id="enfantPrenom" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="enfantDateNaissance">Date de Naissance *</label>
+                                <input type="date" id="enfantDateNaissance" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="enfantClasse">Classe Demandée *</label>
+                                <select id="enfantClasse" class="form-control" required>
+                                    <option value="">Sélectionnez</option>
+                                    <option value="1ere">1ère Année</option>
+                                    <option value="2eme">2ème Année</option>
+                                    <option value="3eme">3ème Année</option>
+                                    <option value="4eme">4ème Année</option>
+                                    <option value="5eme">5ème Année</option>
+                                    <option value="6eme">6ème Année</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <h4 style="margin: 30px 0 20px; color: var(--primary);">Informations des Parents</h4>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="parentNom">Nom du Parent </label>
+                                <input type="text" id="parentNom" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="parentPrenom">Prénom du Parent *</label>
+                                <input type="text" id="parentPrenom" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="parentEmail">Email </label>
+                                <input type="email" id="parentEmail" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="parentPhone">Téléphone </label>
+                                <input type="tel" id="parentPhone" class="form-control" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="messagePrimaire">Message Additionnel</label>
+                            <textarea id="messagePrimaire" class="form-control" rows="4" placeholder="Informations supplémentaires..."></textarea>
+                        </div>
+
+                        <div class="admin-actions">
+                            <button type="submit" class="btn">
+                                <span>Soumettre la Demande</span>
+                                <div class="loading-spinner" style="display: none;"></div>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <div id="secondaire" class="tab-content">
+                    <h3 style="text-align: center; margin-bottom: 30px; color: var(--primary);">Inscription - Enseignement Secondaire</h3>
+                    <form id="inscriptionSecondaireForm">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="eleveNom">Nom de l'Élève *</label>
+                                <input type="text" id="eleveNom" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="elevePrenom">Prénom de l'Élève *</label>
+                                <input type="text" id="elevePrenom" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="eleveDateNaissance">Date de Naissance *</label>
+                                <input type="date" id="eleveDateNaissance" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="eleveOption">Option Demandée *</label>
+                                <select id="eleveOption" class="form-control" required>
+                                    <option value="">Sélectionnez</option>
+                                    <option value="scientifique">Scientifique</option>
+                                    <option value="litteraire">Littéraire</option>
+                                    <option value="pedagogique">Pédagogique</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <h4 style="margin: 30px 0 20px; color: var(--primary);">Informations Scolaires Antérieures</h4>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="ancienneEcole">Ancienne École</label>
+                                <input type="text" id="ancienneEcole" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="derniereClasse">Dernière Classe Frequentée</label>
+                                <input type="text" id="derniereClasse" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="moyenne">Moyenne Générale</label>
+                                <input type="number" id="moyenne" class="form-control" step="0.01" min="0" max="100">
+                            </div>
+                        </div>
+
+                        <div class="admin-actions">
+                            <button type="submit" class="btn">
+                                <span>Soumettre la Demande</span>
+                                <div class="loading-spinner" style="display: none;"></div>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <div id="information" class="tab-content">
+                    <h3 style="text-align: center; margin-bottom: 30px; color: var(--primary);">Demande d'Information</h3>
+                    <form id="infoForm">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="infoNom">Nom Complet *</label>
+                                <input type="text" id="infoNom" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="infoEmail">Email *</label>
+                                <input type="email" id="infoEmail" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="infoPhone">Téléphone</label>
+                                <input type="tel" id="infoPhone" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="infoSujet">Sujet d'Intérêt *</label>
+                                <select id="infoSujet" class="form-control" required>
+                                    <option value="">Sélectionnez</option>
+                                    <option value="primaire">Enseignement Primaire</option>
+                                    <option value="secondaire">Enseignement Secondaire</option>
+                                    <option value="frais">Frais de Scolarité</option>
+                                    <option value="programmes">Programmes Scolaires</option>
+                                    <option value="autres">Autres</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="infoMessage">Votre Message *</label>
+                            <textarea id="infoMessage" class="form-control" rows="5" required placeholder="Décrivez votre demande d'information..."></textarea>
+                        </div>
+
+                        <div class="admin-actions">
+                            <button type="submit" class="btn">
+                                <span>Envoyer la Demande</span>
+                                <div class="loading-spinner" style="display: none;"></div>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Nouvelle Section Blog des Anciens -->
+    <section id="blog" class="blog-section">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>Espace des Anciens</h2>
+                <p>Découvrez les témoignages et expériences de notre communauté</p>
+            </div>
+
+            <div class="blog-filters fade-in">
+                <button class="filter-btn active" data-filter="all">Tous</button>
+                <button class="filter-btn" data-filter="eleve">Anciens Élèves</button>
+                <button class="filter-btn" data-filter="professeur">Professeurs</button>
+                <button class="filter-btn" data-filter="parent">Parents</button>
+                <button class="filter-btn" data-filter="success">Succès</button>
+            </div>
+
+            <div class="blog-grid" id="blogGrid">
+                <!-- Les témoignages seront chargés dynamiquement -->
+                <div class="blog-card" data-category="eleve success">
+                    <div class="blog-header">
+                        <div class="blog-author">
+                            <div class="author-avatar">GK</div>
+                            <div class="author-info">
+                                <h4>Gamaliel Kalambo</h4>
+                                <div class="author-meta">Promotion 2010 • Pédagogie</div>
+                            </div>
+                        </div>
+                        <span class="blog-category">Ancien Élève</span>
+                    </div>
+                    <div class="blog-content">
+                        <h3>De Saint Boniface en pédagogie</h3>
+                        <p>Les valeurs d'excellence et de discipline inculquées au Collège Saint Boniface m'ont accompagné tout au long de mon parcours. La rigueur de l'école et l'éducation chrétienne ont forgé l'homme et le professionnel que je suis devenu.</p>
+                    </div>
+                    <div class="blog-stats">
+                        <div class="stat">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span>Promotion 2010</span>
+                        </div>
+                        <div class="stat">
+                            <i class="fas fa-heart"></i>
+                            <span>24 J'aime</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="blog-card" data-category="professeur">
+                    <div class="blog-header">
+                        <div class="blog-author">
+                            <div class="author-avatar">MG</div>
+                            <div class="author-info">
+                                <h4>Marie Gisèle</h4>
+                                <div class="author-meta">Professeure de Français • 15 ans d'expérience</div>
+                            </div>
+                        </div>
+                        <span class="blog-category">Professeur</span>
+                    </div>
+                    <div class="blog-content">
+                        <h3>15 Ans de Passion Éducative</h3>
+                        <p>Enseigner au Collège Saint Boniface, c'est participer à la formation des leaders de demain. Chaque jour, je constate l'impact positif de notre approche éducative sur le développement des élèves. Une communauté éducative exceptionnelle !</p>
+                    </div>
+                    <div class="blog-stats">
+                        <div class="stat">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                            <span>15 ans d'enseignement</span>
+                        </div>
+                        <div class="stat">
+                            <i class="fas fa-heart"></i>
+                            <span>18 J'aime</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="blog-card" data-category="parent">
+                    <div class="blog-header">
+                        <div class="blog-author">
+                            <div class="author-avatar">LK</div>
+                            <div class="author-info">
+                                <h4>Lucie Kabongo</h4>
+                                <div class="author-meta">Mère de 3 élèves</div>
+                            </div>
+                        </div>
+                        <span class="blog-category">Parent</span>
+                    </div>
+                    <div class="blog-content">
+                        <h3>Une Confiance Totale</h3>
+                        <p>Mes trois enfants ont fréquenté Saint Boniface et chacun y a trouvé son épanouissement. L'encadrement, la qualité de l'enseignement et les valeurs transmises dépassent nos attentes. Un investissement précieux pour leur avenir.</p>
+                    </div>
+                    <div class="blog-stats">
+                        <div class="stat">
+                            <i class="fas fa-users"></i>
+                            <span>3 enfants</span>
+                        </div>
+                        <div class="stat">
+                            <i class="fas fa-heart"></i>
+                            <span>32 J'aime</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="add-testimonial fade-in">
+                <h3>Partagez Votre Expérience</h3>
+                <p>Rejoignez notre communauté et inspirez les générations futures avec votre témoignage</p>
+                <button class="btn btn-outline" onclick="openTestimonialModal()" style="margin-top: 20px;">
+                    <i class="fas fa-plus"></i> Ajouter un Témoignage
+                </button>
+            </div>
+        </div>
+    </section>
+
     <!-- Contact -->
     <section id="contact" class="contact">
         <div class="container">
@@ -1396,7 +2074,7 @@
                             </div>
                             <div class="contact-text">
                                 <h4>Adresse</h4>
-                                <p>Av. Kitumaïni, Quartier Golf<br>Lubumbashi, Haut-Katanga<br>République Démocratique du Congo</p>
+                                <p>Av. Kitumaïni, Quartier Kamalondo<br>Lubumbashi, Haut-Katanga<br>République Démocratique du Congo</p>
                             </div>
                         </div>
                         <div class="contact-item">
@@ -1498,6 +2176,8 @@
                         <li><a href="#centenaire"><i class="fas fa-calendar-star"></i> 100 Ans</a></li>
                         <li><a href="#programmes"><i class="fas fa-book"></i> Programmes</a></li>
                         <li><a href="#actualites"><i class="fas fa-newspaper"></i> Actualités</a></li>
+                        <li><a href="#inscription"><i class="fas fa-file-alt"></i> Inscription</a></li>
+                        <li><a href="#blog"><i class="fas fa-comments"></i> Témoignages</a></li>
                         <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
                     </ul>
                 </div>
@@ -1527,17 +2207,86 @@
         </div>
     </footer>
 
+    <!-- Modal pour Ajouter un Témoignage -->
+    <div id="testimonialModal" class="modal testimonial-modal">
+        <div class="modal-content">
+            <h3 style="text-align: center; margin-bottom: 30px; color: var(--primary);">Partager Votre Témoignage</h3>
+            <form id="testimonialForm">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="testimonialName">Nom Complet *</label>
+                        <input type="text" id="testimonialName" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="testimonialRole">Votre Rôle *</label>
+                        <select id="testimonialRole" class="form-control" required>
+                            <option value="">Sélectionnez</option>
+                            <option value="eleve">Ancien Élève</option>
+                            <option value="professeur">Professeur</option>
+                            <option value="parent">Parent</option>
+                            <option value="autre">Autre</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="testimonialPromotion">Promotion/Années</label>
+                        <input type="text" id="testimonialPromotion" class="form-control" placeholder="Ex: Promotion 2015">
+                    </div>
+                    <div class="form-group">
+                        <label for="testimonialProfession">Profession Actuelle</label>
+                        <input type="text" id="testimonialProfession" class="form-control" placeholder="Votre profession">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Votre Appréciation</label>
+                    <div class="rating-stars">
+                        <span class="star" data-rating="1">★</span>
+                        <span class="star" data-rating="2">★</span>
+                        <span class="star" data-rating="3">★</span>
+                        <span class="star" data-rating="4">★</span>
+                        <span class="star" data-rating="5">★</span>
+                    </div>
+                    <input type="hidden" id="testimonialRating" value="0">
+                </div>
+
+                <div class="form-group">
+                    <label for="testimonialTitle">Titre de Votre Témoignage *</label>
+                    <input type="text" id="testimonialTitle" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="testimonialContent">Votre Témoignage *</label>
+                    <textarea id="testimonialContent" class="form-control" rows="6" required placeholder="Partagez votre expérience au Collège Saint Boniface..."></textarea>
+                </div>
+
+                <div class="admin-actions">
+                    <button type="submit" class="btn">
+                        <span>Publier le Témoignage</span>
+                        <div class="loading-spinner" style="display: none;"></div>
+                    </button>
+                    <button type="button" class="btn btn-outline" onclick="closeModal('testimonialModal')">Annuler</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <!-- Toast Notification -->
     <div class="toast" id="toast">
         <i class="fas fa-check-circle"></i>
         <span id="toastMessage">Votre message a été envoyé avec succès!</span>
     </div>
 
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    
     <!-- Firebase SDK -->
     <script type="module">
         // Import the functions you need from the SDKs you need
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
-        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
+        import { getFirestore, collection, addDoc, serverTimestamp, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
         
         // Your web app's Firebase configuration
         const firebaseConfig = {
@@ -1586,236 +2335,556 @@
                 return false;
             }
         };
+
+        // Nouvelles fonctions pour l'inscription et les témoignages
+        window.saveInscription = async (formData, type) => {
+            try {
+                const docRef = await addDoc(collection(db, "inscriptions"), {
+                    ...formData,
+                    type: type,
+                    status: "en_attente",
+                    timestamp: serverTimestamp()
+                });
+                return true;
+            } catch (error) {
+                console.error("Error:", error);
+                return false;
+            }
+        };
+
+        window.saveTestimonial = async (formData) => {
+            try {
+                const docRef = await addDoc(collection(db, "testimonials"), {
+                    ...formData,
+                    status: "en_attente",
+                    likes: 0,
+                    timestamp: serverTimestamp()
+                });
+                return true;
+            } catch (error) {
+                console.error("Error:", error);
+                return false;
+            }
+        };
+
+        window.loadTestimonials = async () => {
+            try {
+                const q = query(collection(db, "testimonials"), orderBy("timestamp", "desc"));
+                const querySnapshot = await getDocs(q);
+                const testimonials = [];
+                
+                querySnapshot.forEach((doc) => {
+                    testimonials.push({
+                        id: doc.id,
+                        ...doc.data()
+                    });
+                });
+                
+                return testimonials;
+            } catch (error) {
+                console.error("Error loading testimonials:", error);
+                return [];
+            }
+        };
         
         console.log("Firebase initialisé avec succès!");
     </script>
 
     <!-- Scripts JavaScript améliorés -->
     <script>
-        // Menu mobile
-        document.querySelector('.mobile-menu').addEventListener('click', function() {
-            document.querySelector('.nav-links').classList.toggle('active');
-            this.querySelector('i').classList.toggle('fa-bars');
-            this.querySelector('i').classList.toggle('fa-times');
-        });
-
-        // Close mobile menu when clicking on a link
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                document.querySelector('.nav-links').classList.remove('active');
-                document.querySelector('.mobile-menu i').classList.add('fa-bars');
-                document.querySelector('.mobile-menu i').classList.remove('fa-times');
+        // Initialisation
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialiser AOS (Animate On Scroll)
+            AOS.init({
+                duration: 800,
+                once: true,
+                offset: 100
             });
-        });
 
-        // Header scroll effect
-        window.addEventListener('scroll', function() {
-            const header = document.getElementById('header');
-            if (window.scrollY > 50) {
-                header.classList.add('header-scrolled');
-            } else {
-                header.classList.remove('header-scrolled');
+            // Gestion du scroll
+            window.addEventListener('scroll', handleScroll);
+
+            // Menu mobile
+            const mobileMenu = document.querySelector('.mobile-menu');
+            const navLinks = document.querySelector('.nav-links');
+
+            mobileMenu.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+                this.querySelector('i').classList.toggle('fa-bars');
+                this.querySelector('i').classList.toggle('fa-times');
+            });
+
+            // Close mobile menu when clicking on a link
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                    document.querySelector('.mobile-menu i').classList.add('fa-bars');
+                    document.querySelector('.mobile-menu i').classList.remove('fa-times');
+                });
+            });
+
+            // Header scroll effect
+            window.addEventListener('scroll', function() {
+                const header = document.getElementById('header');
+                if (window.scrollY > 50) {
+                    header.classList.add('header-scrolled');
+                } else {
+                    header.classList.remove('header-scrolled');
+                }
+            });
+
+            // Carousel functionality
+            let currentSlide = 0;
+            const slides = document.querySelectorAll('.carousel-item');
+            const dots = document.querySelectorAll('.carousel-dot');
+            const totalSlides = slides.length;
+
+            function showSlide(n) {
+                slides.forEach(slide => slide.classList.remove('active'));
+                dots.forEach(dot => dot.classList.remove('active'));
+                
+                currentSlide = (n + totalSlides) % totalSlides;
+                
+                slides[currentSlide].classList.add('active');
+                dots[currentSlide].classList.add('active');
             }
-        });
 
-        // Carousel functionality
-        let currentSlide = 0;
-        const slides = document.querySelectorAll('.carousel-item');
-        const dots = document.querySelectorAll('.carousel-dot');
-        const totalSlides = slides.length;
-
-        function showSlide(n) {
-            slides.forEach(slide => slide.classList.remove('active'));
-            dots.forEach(dot => dot.classList.remove('active'));
-            
-            currentSlide = (n + totalSlides) % totalSlides;
-            
-            slides[currentSlide].classList.add('active');
-            dots[currentSlide].classList.add('active');
-        }
-
-        // Auto-advance carousel
-        let carouselInterval = setInterval(() => {
-            showSlide(currentSlide + 1);
-        }, 6000);
-
-        // Pause carousel on hover
-        const carousel = document.querySelector('.carousel');
-        carousel.addEventListener('mouseenter', () => {
-            clearInterval(carouselInterval);
-        });
-        
-        carousel.addEventListener('mouseleave', () => {
-            carouselInterval = setInterval(() => {
+            // Auto-advance carousel
+            let carouselInterval = setInterval(() => {
                 showSlide(currentSlide + 1);
             }, 6000);
-        });
 
-        // Dot controls
-        dots.forEach((dot, index) => {
-            dot.addEventListener('click', () => {
-                showSlide(index);
+            // Pause carousel on hover
+            const carousel = document.querySelector('.carousel');
+            carousel.addEventListener('mouseenter', () => {
+                clearInterval(carouselInterval);
+            });
+            
+            carousel.addEventListener('mouseleave', () => {
+                carouselInterval = setInterval(() => {
+                    showSlide(currentSlide + 1);
+                }, 6000);
+            });
+
+            // Dot controls
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    showSlide(index);
+                });
+            });
+
+            // Arrow controls
+            document.querySelector('.carousel-arrow.prev').addEventListener('click', () => {
+                showSlide(currentSlide - 1);
+            });
+            
+            document.querySelector('.carousel-arrow.next').addEventListener('click', () => {
+                showSlide(currentSlide + 1);
+            });
+
+            // Scroll animations
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+
+            fadeElements.forEach(el => {
+                observer.observe(el);
+            });
+
+            // Animated counter for stats
+            const statNumbers = document.querySelectorAll('.stat-number');
+            
+            const startCounting = (element) => {
+                const target = parseInt(element.getAttribute('data-count'));
+                const duration = 2000; // 2 seconds
+                const step = target / (duration / 16); // 60fps
+                let current = 0;
+                
+                const timer = setInterval(() => {
+                    current += step;
+                    if (current >= target) {
+                        element.textContent = target;
+                        clearInterval(timer);
+                    } else {
+                        element.textContent = Math.floor(current);
+                    }
+                }, 16);
+            };
+            
+            const statsObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        startCounting(entry.target);
+                        statsObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            statNumbers.forEach(stat => {
+                statsObserver.observe(stat);
+            });
+
+            // Toast notification function
+            function showToast(message, type = 'success') {
+                const toast = document.getElementById('toast');
+                const toastMessage = document.getElementById('toastMessage');
+                
+                toastMessage.textContent = message;
+                toast.className = 'toast';
+                toast.classList.add(type);
+                toast.classList.add('show');
+                
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 5000);
+            }
+
+            // Contact form submission
+            document.getElementById('contactForm').addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                const submitBtn = document.getElementById('submitBtn');
+                const btnText = submitBtn.querySelector('span');
+                const spinner = submitBtn.querySelector('.loading-spinner');
+                
+                // Show loading state
+                btnText.style.display = 'none';
+                spinner.style.display = 'inline-block';
+                submitBtn.disabled = true;
+                
+                // Collect form data
+                const formData = {
+                    name: document.getElementById('name').value,
+                    email: document.getElementById('email').value,
+                    phone: document.getElementById('phone').value,
+                    subject: document.getElementById('subject').value,
+                    message: document.getElementById('message').value
+                };
+                
+                try {
+                    // Save to Firebase
+                    const success = await saveContactForm(formData);
+                    
+                    if (success) {
+                        showToast('Votre message a été envoyé avec succès! Nous vous répondrons dans les plus brefs délais.', 'success');
+                        this.reset();
+                    } else {
+                        showToast('Une erreur est survenue lors de l\'envoi de votre message. Veuillez réessayer.', 'error');
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                    showToast('Une erreur est survenue lors de l\'envoi de votre message. Veuillez réessayer.', 'error');
+                } finally {
+                    // Reset button state
+                    btnText.style.display = 'inline';
+                    spinner.style.display = 'none';
+                    submitBtn.disabled = false;
+                }
+            });
+
+            // Newsletter form submission
+            document.getElementById('newsletterForm').addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                const email = this.querySelector('input[type="email"]').value;
+                
+                try {
+                    const success = await saveNewsletterSubscription(email);
+                    
+                    if (success) {
+                        showToast('Merci pour votre inscription à notre newsletter!', 'success');
+                        this.reset();
+                    } else {
+                        showToast('Une erreur est survenue lors de votre inscription. Veuillez réessayer.', 'error');
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                    showToast('Une erreur est survenue lors de votre inscription. Veuillez réessayer.', 'error');
+                }
+            });
+
+            // Gestion des tabs d'inscription
+            const formTabs = document.querySelectorAll('.form-tab');
+            formTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const tabId = this.dataset.tab;
+                    
+                    // Mettre à jour les tabs
+                    formTabs.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Afficher le contenu correspondant
+                    document.querySelectorAll('.tab-content').forEach(content => {
+                        content.classList.remove('active');
+                    });
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+
+            // Filtres du blog
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const filter = this.dataset.filter;
+                    
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    filterBlogPosts(filter);
+                });
+            });
+
+            // Système d'évaluation par étoiles
+            const stars = document.querySelectorAll('.star');
+            stars.forEach(star => {
+                star.addEventListener('click', function() {
+                    const rating = this.dataset.rating;
+                    document.getElementById('testimonialRating').value = rating;
+                    
+                    stars.forEach(s => s.classList.remove('active'));
+                    for (let i = 0; i < rating; i++) {
+                        stars[i].classList.add('active');
+                    }
+                });
+            });
+
+            // Formulaires d'inscription
+            document.getElementById('inscriptionPrimaireForm').addEventListener('submit', handleInscriptionSubmit);
+            document.getElementById('inscriptionSecondaireForm').addEventListener('submit', handleInscriptionSubmit);
+            document.getElementById('infoForm').addEventListener('submit', handleInfoSubmit);
+            document.getElementById('testimonialForm').addEventListener('submit', handleTestimonialSubmit);
+
+            // Charger les témoignages depuis Firebase
+            loadTestimonialsFromFirebase();
+
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        const headerHeight = document.getElementById('header').offsetHeight;
+                        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+                        
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
             });
         });
 
-        // Arrow controls
-        document.querySelector('.carousel-arrow.prev').addEventListener('click', () => {
-            showSlide(currentSlide - 1);
-        });
-        
-        document.querySelector('.carousel-arrow.next').addEventListener('click', () => {
-            showSlide(currentSlide + 1);
-        });
-
-        // Scroll animations
-        const fadeElements = document.querySelectorAll('.fade-in');
-        
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, {
-            threshold: 0.1
-        });
-
-        fadeElements.forEach(el => {
-            observer.observe(el);
-        });
-
-        // Animated counter for stats
-        const statNumbers = document.querySelectorAll('.stat-number');
-        
-        const startCounting = (element) => {
-            const target = parseInt(element.getAttribute('data-count'));
-            const duration = 2000; // 2 seconds
-            const step = target / (duration / 16); // 60fps
-            let current = 0;
-            
-            const timer = setInterval(() => {
-                current += step;
-                if (current >= target) {
-                    element.textContent = target;
-                    clearInterval(timer);
-                } else {
-                    element.textContent = Math.floor(current);
-                }
-            }, 16);
-        };
-        
-        const statsObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    startCounting(entry.target);
-                    statsObserver.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.5 });
-        
-        statNumbers.forEach(stat => {
-            statsObserver.observe(stat);
-        });
-
-        // Toast notification function
-        function showToast(message, type = 'success') {
-            const toast = document.getElementById('toast');
-            const toastMessage = document.getElementById('toastMessage');
-            
-            toastMessage.textContent = message;
-            toast.className = 'toast';
-            toast.classList.add(type);
-            toast.classList.add('show');
-            
-            setTimeout(() => {
-                toast.classList.remove('show');
-            }, 5000);
+        // Gestion du scroll
+        function handleScroll() {
+            // Barre de progression
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById("scrollProgress").style.width = scrolled + "%";
         }
 
-        // Contact form submission
-        document.getElementById('contactForm').addEventListener('submit', async function(e) {
+        async function handleInscriptionSubmit(e) {
             e.preventDefault();
+            const formData = new FormData(e.target);
+            const data = Object.fromEntries(formData);
+            const type = e.target.id.includes('Primaire') ? 'primaire' : 'secondaire';
             
-            const submitBtn = document.getElementById('submitBtn');
+            const submitBtn = e.target.querySelector('button[type="submit"]');
             const btnText = submitBtn.querySelector('span');
             const spinner = submitBtn.querySelector('.loading-spinner');
             
-            // Show loading state
             btnText.style.display = 'none';
             spinner.style.display = 'inline-block';
             submitBtn.disabled = true;
             
-            // Collect form data
-            const formData = {
-                name: document.getElementById('name').value,
-                email: document.getElementById('email').value,
-                phone: document.getElementById('phone').value,
-                subject: document.getElementById('subject').value,
-                message: document.getElementById('message').value
-            };
-            
             try {
-                // Save to Firebase
-                const success = await saveContactForm(formData);
-                
+                const success = await saveInscription(data, type);
                 if (success) {
-                    showToast('Votre message a été envoyé avec succès! Nous vous répondrons dans les plus brefs délais.', 'success');
-                    this.reset();
+                    showToast('Votre demande d\'inscription a été soumise avec succès!', 'success');
+                    e.target.reset();
                 } else {
-                    showToast('Une erreur est survenue lors de l\'envoi de votre message. Veuillez réessayer.', 'error');
+                    showToast('Une erreur est survenue. Veuillez réessayer.', 'error');
                 }
             } catch (error) {
-                console.error('Error:', error);
-                showToast('Une erreur est survenue lors de l\'envoi de votre message. Veuillez réessayer.', 'error');
+                showToast('Une erreur est survenue. Veuillez réessayer.', 'error');
             } finally {
-                // Reset button state
                 btnText.style.display = 'inline';
                 spinner.style.display = 'none';
                 submitBtn.disabled = false;
             }
-        });
+        }
 
-        // Newsletter form submission
-        document.getElementById('newsletterForm').addEventListener('submit', async function(e) {
+        async function handleInfoSubmit(e) {
             e.preventDefault();
+            const formData = new FormData(e.target);
+            const data = Object.fromEntries(formData);
             
-            const email = this.querySelector('input[type="email"]').value;
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+            const btnText = submitBtn.querySelector('span');
+            const spinner = submitBtn.querySelector('.loading-spinner');
+            
+            btnText.style.display = 'none';
+            spinner.style.display = 'inline-block';
+            submitBtn.disabled = true;
             
             try {
-                const success = await saveNewsletterSubscription(email);
-                
+                const success = await saveInscription(data, 'information');
                 if (success) {
-                    showToast('Merci pour votre inscription à notre newsletter!', 'success');
-                    this.reset();
+                    showToast('Votre demande d\'information a été envoyée avec succès!', 'success');
+                    e.target.reset();
                 } else {
-                    showToast('Une erreur est survenue lors de votre inscription. Veuillez réessayer.', 'error');
+                    showToast('Une erreur est survenue. Veuillez réessayer.', 'error');
                 }
             } catch (error) {
-                console.error('Error:', error);
-                showToast('Une erreur est survenue lors de votre inscription. Veuillez réessayer.', 'error');
+                showToast('Une erreur est survenue. Veuillez réessayer.', 'error');
+            } finally {
+                btnText.style.display = 'inline';
+                spinner.style.display = 'none';
+                submitBtn.disabled = false;
             }
-        });
+        }
 
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    const headerHeight = document.getElementById('header').offsetHeight;
-                    const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
-                    
-                    window.scrollTo({
-                        top: targetPosition,
-                        behavior: 'smooth'
-                    });
+        async function handleTestimonialSubmit(e) {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const data = Object.fromEntries(formData);
+            
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+            const btnText = submitBtn.querySelector('span');
+            const spinner = submitBtn.querySelector('.loading-spinner');
+            
+            btnText.style.display = 'none';
+            spinner.style.display = 'inline-block';
+            submitBtn.disabled = true;
+            
+            try {
+                const success = await saveTestimonial(data);
+                if (success) {
+                    showToast('Votre témoignage a été soumis avec succès! Il sera publié après modération.', 'success');
+                    e.target.reset();
+                    closeModal('testimonialModal');
+                    loadTestimonialsFromFirebase();
+                } else {
+                    showToast('Une erreur est survenue. Veuillez réessayer.', 'error');
+                }
+            } catch (error) {
+                showToast('Une erreur est survenue. Veuillez réessayer.', 'error');
+            } finally {
+                btnText.style.display = 'inline';
+                spinner.style.display = 'none';
+                submitBtn.disabled = false;
+            }
+        }
+
+        function filterBlogPosts(filter) {
+            const posts = document.querySelectorAll('.blog-card');
+            posts.forEach(post => {
+                if (filter === 'all' || post.dataset.category.includes(filter)) {
+                    post.style.display = 'block';
+                } else {
+                    post.style.display = 'none';
                 }
             });
-        });
+        }
+
+        function openTestimonialModal() {
+            document.getElementById('testimonialModal').classList.add('active');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
+
+        async function loadTestimonialsFromFirebase() {
+            try {
+                const testimonials = await loadTestimonials();
+                const blogGrid = document.getElementById('blogGrid');
+                
+                // Garder les témoignages par défaut + ajouter ceux de Firebase
+                const defaultTestimonials = blogGrid.innerHTML;
+                
+                if (testimonials.length > 0) {
+                    let testimonialsHTML = '';
+                    
+                    testimonials.forEach(testimonial => {
+                        if (testimonial.status === 'approuve') {
+                            const avatarText = testimonial.name.split(' ').map(n => n[0]).join('').toUpperCase();
+                            const categoryClass = getCategoryClass(testimonial.role);
+                            
+                            testimonialsHTML += `
+                                <div class="blog-card" data-category="${categoryClass}">
+                                    <div class="blog-header">
+                                        <div class="blog-author">
+                                            <div class="author-avatar">${avatarText}</div>
+                                            <div class="author-info">
+                                                <h4>${testimonial.name}</h4>
+                                                <div class="author-meta">${testimonial.promotion || ''}${testimonial.promotion && testimonial.profession ? ' • ' : ''}${testimonial.profession || ''}</div>
+                                            </div>
+                                        </div>
+                                        <span class="blog-category">${getRoleLabel(testimonial.role)}</span>
+                                    </div>
+                                    <div class="blog-content">
+                                        <h3>${testimonial.title}</h3>
+                                        <p>${testimonial.content}</p>
+                                    </div>
+                                    <div class="blog-stats">
+                                        <div class="stat">
+                                            <i class="fas fa-star"></i>
+                                            <span>${testimonial.rating}/5</span>
+                                        </div>
+                                        <div class="stat">
+                                            <i class="fas fa-heart"></i>
+                                            <span>${testimonial.likes || 0} J'aime</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            `;
+                        }
+                    });
+                    
+                    blogGrid.innerHTML = testimonialsHTML + defaultTestimonials;
+                }
+            } catch (error) {
+                console.error('Error loading testimonials:', error);
+            }
+        }
+
+        function getCategoryClass(role) {
+            const classes = {
+                'eleve': 'eleve',
+                'professeur': 'professeur', 
+                'parent': 'parent',
+                'autre': 'eleve'
+            };
+            return classes[role] || 'eleve';
+        }
+
+        function getRoleLabel(role) {
+            const labels = {
+                'eleve': 'Ancien Élève',
+                'professeur': 'Professeur',
+                'parent': 'Parent',
+                'autre': 'Membre'
+            };
+            return labels[role] || 'Membre';
+        }
+
+        // Raccourcis globaux
+        window.openTestimonialModal = openTestimonialModal;
+        window.closeModal = closeModal;
     </script>
 </body>
 </html>
